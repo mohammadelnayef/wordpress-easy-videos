@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  #Database
+  easy-videos-db:
+    image: mysql:5.7
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - easy-videos-network
+  #Wordpress    
+  easy-videos-wordpress:
+    depends_on:
+      - easy-videos-db
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./wordpress:/var/www/html
+    environment:
+       MYSQL_DATABASE: wordpress
+       WORDPRESS_DB_HOST: easy-videos-db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+    ports:
+      - "8992:80"
+    networks:
+      - easy-videos-network
+networks:
+  easy-videos-network:
+volumes:
+  db_data:

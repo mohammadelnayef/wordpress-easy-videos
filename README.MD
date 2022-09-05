@@ -1,0 +1,2 @@
+# Easy Videos WordPress plugin
+This is a WordPress docker instance that hosts the Easy Videos plugin. This plugin fetches data via the Youtube API , creates a custom post type called Easy Videos + meta fields. The "Add New" button of the Easy Video admin page is changed to "Insert Video" and instead of redirecting to the create a new post page, it fetches the data via the youtube api and it creates a new post automatically. 
